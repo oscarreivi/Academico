@@ -1,29 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
   {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    
+        
   {% endfor %}
-  <h1>Hello World!</h1>
+  <h1>BIENVENIDOS AL PROGRAMA DE MATRICULA 2022-I</h1>
 
-  <p>This is my first webpage!!!</p>
-
-  <p>My name is {{ first_name|upper }}</p>
-
-  <p>{{ stuff|title }}</p>
-
-  <h3>My favorite Pizza: </h3>
-  {% for topping in favorite_pizza %}
-    {% if topping == 41 %}
-      {{ topping +100 }}<br/>
-    {% else %}
-      {{ topping }}<br/>
-    {% endif %}
-  {% endfor %}
-
-  {{ favorite_pizza.0|reverse }}
+  <center><p>En esta Pagina se podran Registrar los cursos, estudiantes y escuelas profesionales de la universidad</p></center><br>
+  <center><p><img src="https://www.unamba.edu.pe/media/k2/items/cache/cd04214d115e7a754daa198b57282145_XL.jpg" alt=""></p><p><img src="http://sisacademico.unamba.edu.pe/bootstrap/img/2022-1/ampliacion_matricula.jpg" alt="" width="600" height="400"></p></center>
 
 {% endblock %}
