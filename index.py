@@ -13,8 +13,7 @@ from datetime import datetime
 #==============CONFIGURANDO LA CONEXION A LA BASE DE DATOS DE MYSQL=================================#
 #https://wtforms.readthedocs.io/en/3.0.x/
 app=Flask(__name__)
-if __name__=='__main__':
-    app.run(debug=True,port=5000,host="0.0.0.0")
+
 #Add Database
 app.config['SQLALCHEMY_DATABASE_URI']='mysql://admin:oscar_123@dbacademico.cwl8pwi5cqbm.us-east-1.rds.amazonaws.com/bdacademico'
 app.config['SQLALCHEMY_TRACK_MODEFICATIONS']=False
@@ -315,3 +314,7 @@ def delete_matricula(id):
     db.session.delete(deletematri)
     db.session.commit()
     return redirect('/matricula/add')
+
+
+if __name__=='__main__':
+    app.run(debug=True,port=5000,host="0.0.0.0")
