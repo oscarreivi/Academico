@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <a aria-hidden="true">&times;;</a>
+            </button>
+        </div>
+        
+    {% endfor %}
+
+
+    {% if name %}
+        <h1>Se edito correctamente el registro</h1>
+        <br/>        
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Codigo del estudiante</th>
+                <th scope="col">Codigo de curso</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for our_matricula in our_matriculas %}
+              <tr>
+                <th scope="row">{{ our_matricula.id }}</th>
+                <td>{{ our_matricula.id_estudiante }}</td>
+                <td>{{ our_matricula.id_curso}}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ url_for('update_matricula', id=our_matricula.id) }}">Editar</a>
+                    <a class="btn btn-danger" href="{{ url_for('delete_matricula', id =our_matricula.id) }}">Eliminar</a>
+                    <br>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>         
+    {% else %}
+        <h1>Editando la Matricula</h1>
+        <br/>
+        <form action="/matricula_edit/{{matri.id}}" method="POST">
+            
+            {{ form.hidden_tag() }}
+            <label for="exampleFormControlInput1" class="form-label">Codigo del estudiante</label>
+            <input type="text" class="form-control" name="id_estudiante" value="{{matri.id_estudiante}}" required>
+            <br>
+            <label for="exampleFormControlInput1" class="form-label">Codigo de curso</label>
+            <input type="text" class="form-control" name="id_curso" value="{{matri.id_curso}}" required>
+            <br>
+            {{ form.submit() }}
+        </form>
+    {% endif %}
+{% endblock %}

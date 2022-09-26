@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <a aria-hidden="true">&times;;</a>
+            </button>
+        </div>
+        
+    {% endfor %}
+
+
+    {% if name %}
+        <h1>Se edito correctamente el resgistro</h1>
+        <br/>        
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Fecha Nacimiento</th>
+                <th scope="col">Sexo</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for our_est in our_ests %}
+              <tr>
+                <th scope="row">{{ our_est.id }}</th>
+                <td>{{ our_est.DNI }}</td>
+                <td>{{ our_est.apellidos}}</td>
+                <td>{{ our_est.nombres}}</td>
+                <td>{{ our_est.fecha_nacimiento}}</td>
+                <td>{{ our_est.sexo}}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ url_for('update_estudiante', id=our_est.id) }}">Editar</a>
+                    <a class="btn btn-danger" href="{{ url_for('delete_estudiante', id =our_est.id) }}">Eliminar</a>
+                    <br>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>         
+    {% else %}
+        <h1>Edidt Your Name?!</h1>
+        <br/>
+        <form action="/estudiante_edit/{{estu.id}}" method="POST">
+            
+            {{ form.hidden_tag() }}
+            <label for="exampleFormControlInput1" class="form-label">Codigo</label>
+            <input type="text" class="form-control" name="id" value="{{estu.id}}" required>
+            <br>
+            <label for="exampleFormControlInput1" class="form-label">DNI</label>
+            <input type="text" class="form-control" name="DNI" value="{{estu.DNI}}" required>
+            <br>
+            <label for="exampleFormControlTextarea1" class="form-label">Apellidos</label>
+            <input type="text" class="form-control" name="apellidos" value="{{estu.apellidos}}" required>
+            <br/>
+            <label for="exampleFormControlTextarea1" class="form-label">Nombres</label>
+            <input type="text" class="form-control" name="nombres" value="{{estu.nombres}}" required>
+            <br/>
+            <label for="exampleFormControlTextarea1" class="form-label">Fecha de Nacimiento</label>
+            <input type="text" class="form-control" name="fecha_nacimiento" value="{{estu.fecha_nacimiento}}" required>
+            <br/>
+            <label for="exampleFormControlTextarea1" class="form-label">Sexo</label>
+            <input type="text" class="form-control" name="sexo" value="{{estu.sexo}}" required>
+            <br/>
+            {{ form.submit() }}
+        </form>
+    {% endif %}
+{% endblock %}
